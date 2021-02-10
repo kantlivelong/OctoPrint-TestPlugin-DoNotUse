@@ -6,7 +6,7 @@ import setuptools
 plugin_identifier = "testplugin_donotuse"
 plugin_package = "octoprint_%s" % plugin_identifier
 plugin_name = "OctoPrint-TestPlugin-DoNotUse"
-plugin_version = "0.0.1"
+plugin_version = "0.0.2"
 plugin_description = "OctoPrint-TestPlugin-DoNotUse"
 plugin_author = "Shawn Bruce"
 plugin_author_email = "kantlivelong@gmail.com"

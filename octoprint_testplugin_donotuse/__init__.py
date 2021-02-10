@@ -13,6 +13,7 @@ import subprocess
 import threading
 import os
 from flask import make_response, jsonify
+import sys
 
 class TestPlugin_DoNotUse(octoprint.plugin.StartupPlugin,
                  octoprint.plugin.TemplatePlugin,
@@ -22,21 +23,25 @@ class TestPlugin_DoNotUse(octoprint.plugin.StartupPlugin,
                  octoprint.plugin.EventHandlerPlugin):
 
     def get_update_information(self):
-        return dict(
-            testplugin_donotuse=dict(
-                displayName="OctoPrint-TestPlugin-DoNotUse",
-                displayVersion=self._plugin_version,
+        data=dict(
+            displayName="OctoPrint-TestPlugin-DoNotUse",
+            displayVersion=self._plugin_version,
 
-                # version check: github repository
-                type="github_release",
-                user="kantlivelong",
-                repo="OctoPrint-TestPlugin-DoNotUse",
-                current=self._plugin_version,
+            # version check: github repository
+            type="github_release",
+            user="kantlivelong",
+            repo="OctoPrint-TestPlugin-DoNotUse",
+            current=self._plugin_version,
 
-                # update method: pip w/ dependency links
-                pip="https://github.com/kantlivelong/OctoPrint-TestPlugin-DoNotUse/archive/{target_version}.zip"
-            )
+            # update method: pip w/ dependency links
+            pip="https://github.com/kantlivelong/OctoPrint-TestPlugin-DoNotUse/archive/{target_version}.zip"
         )
+
+        if sys.version_info[0] < 3:
+            data['type'] = 'github_commit'
+            data['branch'] = 'py2'
+
+        return dict(testplugin_donotuse=data)
 
 __plugin_name__ = "OctoPrint-TestPlugin-DoNotUse"
 __plugin_pythoncompat__ = ">=2.7,<4"
