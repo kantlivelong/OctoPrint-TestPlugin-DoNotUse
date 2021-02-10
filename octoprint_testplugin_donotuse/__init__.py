@@ -44,7 +44,7 @@ class TestPlugin_DoNotUse(octoprint.plugin.StartupPlugin,
         return dict(testplugin_donotuse=data)
 
 __plugin_name__ = "OctoPrint-TestPlugin-DoNotUse"
-__plugin_pythoncompat__ = ">=2.7,<4"
+__plugin_pythoncompat__ = ">=3,<4"
 
 def __plugin_load__():
     global __plugin_implementation__
